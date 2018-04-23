@@ -1,0 +1,32 @@
+.form-container {
+    border: 1px solid black;
+    background: white;
+    padding: 10px 20px;
+    border-radius: 30px;
+}
+
+.index-container {
+    height: 100vh;
+    background-image: url('../img/landArt1.jpg');
+    background-size: cover;
+}
+
+.row {
+    height: 100%;
+}
+
+.img-row {
+    height: 50vh;
+    background-image: url('../img/landArt6.jpg');
+    background-size: cover;
+}
+
+.hide-auth-error {
+    visibility: hidden;
+  }
+
+.deck-info-col {
+    border-right: 1px solid lightgrey;
+    height: 30vh;
+}  
+
