@@ -28,5 +28,13 @@
 .deck-info-col {
     border-right: 1px solid lightgrey;
     height: 30vh;
-}  
+}
+
+.library-img {
+    margin: 10px;
+}
+
+.selected {
+    opacity: .5;
+}
 

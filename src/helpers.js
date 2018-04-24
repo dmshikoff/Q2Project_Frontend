@@ -28,12 +28,12 @@ function createImgElement(string) {
   const display = document.querySelector('.library-display')
   let img = document.createElement('img')
   img.setAttribute('src', string)
+  img.classList.add('library-img')
   display.appendChild(img)
 }
 
-function createImgElementInModal(string) {
-  const display = document.querySelector('.add-card-modal-body')
-  let img = document.createElement('img')
-  img.setAttribute('src', string)
-  display.appendChild(img)
+function empty(element){
+  while(element.firstChild){
+    element.removeChild(element.firstChild)
+  }
 }
