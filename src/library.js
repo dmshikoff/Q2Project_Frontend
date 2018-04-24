@@ -1,3 +1,5 @@
+const content = require()
+
 (function () {
   'use strict';
   let cards;
@@ -128,3 +130,29 @@ function returnDisplay(obj){
   return resultObj
 }
 
+const addCard = document.querySelector('.card-add')
+addCard.addEventListener('click', event => {
+  
+})
+
+
+function textQueryCreator(string) {
+  let newString = string.trim()
+    .split(' ')
+    .join('%20')
+  return newString
+}
+
+function createImgElement(string) {
+  const display = document.querySelector('.library-display')
+  let img = document.createElement('img')
+  img.setAttribute('src', string)
+  img.classList.add('library-img')
+  display.appendChild(img)
+}
+
+function empty(element){
+  while(element.firstChild){
+    element.removeChild(element.firstChild)
+  }
+}
