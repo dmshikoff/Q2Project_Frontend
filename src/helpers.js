@@ -17,23 +17,3 @@ function request(path, method = 'get', body = null) {
   })
 }
 
-function textQueryCreator(string) {
-  let newString = string.trim()
-    .split(' ')
-    .join('%20')
-  return newString
-}
-
-function createImgElement(string) {
-  const display = document.querySelector('.library-display')
-  let img = document.createElement('img')
-  img.setAttribute('src', string)
-  img.classList.add('library-img')
-  display.appendChild(img)
-}
-
-function empty(element){
-  while(element.firstChild){
-    element.removeChild(element.firstChild)
-  }
-}
