@@ -38,3 +38,18 @@
     opacity: .5;
 }
 
+.success-display {
+    opacity: 0;
+    color: #40E86B;
+    transition: opacity .5s; 
+}
+
+.remove-success-display {
+    opacity: 0;
+    color: #FF3C40;
+    transition: opacity .5s;
+}
+
+.show {
+    opacity: 1;
+}

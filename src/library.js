@@ -1,9 +1,7 @@
-const content = require()
-
 (function () {
   'use strict';
   let cards;
-  
+
   // auth gate
   request('/auth/token')
     .then(function (response) {
@@ -19,6 +17,8 @@ const content = require()
 const librarySearch = document.querySelector('.library-search-form')
 librarySearch.addEventListener('submit', event => {
   event.preventDefault()
+  const display = document.querySelector('.library-display')
+  empty(display)
   let searchQuery = {}
   if (event.target.exampleRadios.value === 'name' && event.target.searchTerm.value) {
     searchQuery.name = textQueryCreator(event.target.searchTerm.value)
@@ -47,6 +47,9 @@ librarySearch.addEventListener('submit', event => {
   if (event.target.green.checked === true) {
     searchQuery.green = true
   }
+  if (event.target.colorless.checked === true) {
+    searchQuery.colorless = true
+  }
   let queryText = `?`
   for (let key in searchQuery) {
     const keyValueText = `${key}=${searchQuery[key]}`
@@ -54,21 +57,26 @@ librarySearch.addEventListener('submit', event => {
   }
   queryText = queryText.slice(0, queryText.length - 1)
 
-  axios.get(`http://localhost:3000/cards${queryText}`)
+  request('/auth/token')
     .then(response => {
-      let img = response.data.reduce((acc, ele) => {
-        acc.push(ele.img)
-        return acc
-      }, []).forEach(ele => {
+      request(`/users/${response.data.id}/cards${queryText}`)
+        .then(data => {
+          let img = data.data.reduce((acc, ele) => {
+            acc.push(ele.img)
+            return acc
+          }, []).forEach(ele => {
 
-        createImgElement(ele)
-      })
+            createImgElement(ele)
+          })
+        })
     })
+
 })
 
 const addCardForm = document.querySelector('.add-card-form')
 addCardForm.addEventListener('submit', event => {
   event.preventDefault()
+
   const display = document.querySelector('.add-card-modal-body')
   empty(display)
 
@@ -88,19 +96,23 @@ addCardForm.addEventListener('submit', event => {
       })
 
 
-        cards.reduce((acc, ele) => {
-          acc.push({img:ele.img, id:ele.multiverseId})
+      cards.reduce((acc, ele) => {
+          acc.push({
+            img: ele.img,
+            id: ele.multiverseId
+          })
           return acc
         }, [])
         .forEach(ele => {
           const putArray = []
           display.appendChild(createImgElementInModal(ele))
         })
-        const cardArray = document.querySelectorAll('.library-img')
+      // const cardArray = document.querySelectorAll('.library-img')
     })
 })
 
 const selectedCards = [];
+
 function createImgElementInModal(string) {
   let img = document.createElement('img')
   img.setAttribute('src', string.img)
@@ -108,7 +120,8 @@ function createImgElementInModal(string) {
   img.classList.add('library-img')
   img.addEventListener('click', event => {
     img.classList.add('selected')
-    selectedCards.push(cards.find(obj => obj.multiverseId == event.target.getAttribute('data-id')))
+    selectedCards.push(cards.find(obj => obj.id == event.target.getAttribute('data-id')))
+    console.log(selectedCards)
   })
   return img
 }
@@ -119,20 +132,57 @@ addCardCancel.addEventListener('click', event => {
   empty(display)
 })
 
-function returnDisplay(obj){
+function returnDisplay(obj) {
   let resultObj = {}
-  if(obj.colors){
-    returnObj = { multiverseId: obj.multiverseid, name: obj.name, cmc: obj.cmc, text: obj.text, red: obj.colors.includes('Red') ? true : false, black: obj.colors.includes('Black') ? true : false, green: obj.colors.includes('Green') ? true : false, white: obj.colors.includes('White') ? true : false, blue: obj.colors.includes('Blue') ? true : false, colorless: false, img: obj.imageUrl}
-  }
-  else{
-    resultObj = { multiverseId: obj.multiverseid, name: obj.name, cmc: obj.cmc, text: obj.text, red: false, black: false, green: false, white: false, blue: false, colorless: true, img: obj.imageUrl }
+  if (obj.colors) {
+    resultObj = {
+      multiverseId: obj.multiverseid,
+      name: obj.name,
+      cmc: obj.cmc,
+      text: obj.text || 'none',
+      red: obj.colors.includes('Red') ? true : false,
+      black: obj.colors.includes('Black') ? true : false,
+      green: obj.colors.includes('Green') ? true : false,
+      white: obj.colors.includes('White') ? true : false,
+      blue: obj.colors.includes('Blue') ? true : false,
+      colorless: false,
+      img: obj.imageUrl,
+      type: obj.types,
+      subtype: obj.subtypes || []
+    }
+  } else {
+    resultObj = {
+      multiverseId: obj.multiverseid,
+      name: obj.name,
+      cmc: obj.cmc,
+      text: obj.text || 'none',
+      red: false,
+      black: false,
+      green: false,
+      white: false,
+      blue: false,
+      colorless: true,
+      img: obj.imageUrl,
+      type: obj.types,
+      subtype: obj.subtypes || []
+    }
   }
   return resultObj
 }
 
 const addCard = document.querySelector('.card-add')
 addCard.addEventListener('click', event => {
-  
+  const successText = document.querySelector('.success-display')
+  successText.classList.add('show')
+  setTimeout(() => {
+    successText.classList.remove('show')
+  }, 2000)
+  request('/auth/token')
+    .then(response => {
+
+      request(`/users/${response.data.id}/cards`, 'post', selectedCards)
+    })
+
 })
 
 
@@ -151,8 +201,61 @@ function createImgElement(string) {
   display.appendChild(img)
 }
 
-function empty(element){
-  while(element.firstChild){
+function empty(element) {
+  while (element.firstChild) {
     element.removeChild(element.firstChild)
   }
 }
+
+const removeCardForm = document.querySelector('.remove-card-form')
+removeCardForm.addEventListener('submit', event => {
+  event.preventDefault()
+
+  const display = document.querySelector('.remove-card-modal-body')
+  empty(display)
+
+  let searchQuery = {}
+  searchQuery.name = textQueryCreator(event.target.removeCardQuery.value)
+  let queryText = `?`
+  for (let key in searchQuery) {
+    const keyValueText = `${key}=${searchQuery[key]}`
+    queryText += `${keyValueText}&`
+  }
+  queryText = queryText.slice(0, queryText.length - 1)
+
+  request('/auth/token')
+    .then(response => {
+
+      request(`/users/${response.data.id}/cards${queryText}`)
+        .then(response => {
+          cards = response.data
+
+          cards.reduce((acc, ele) => {
+              acc.push({
+                img: ele.img,
+                id: ele.id
+              })
+              return acc
+            }, [])
+            .forEach(ele => {
+              display.appendChild(createImgElementInModal(ele))
+            })
+          // const cardArray = document.querySelectorAll('.library-img')
+        })
+    })
+})
+
+const removeCard = document.querySelector('.card-remove')
+removeCard.addEventListener('click', event => {
+  const successText = document.querySelector('.remove-success-display')
+  successText.classList.add('show')
+  setTimeout(() => {
+    successText.classList.remove('show')
+  }, 2000)
+  request('/auth/token')
+    .then(response => {
+
+      request(`/users/${response.data.id}/cards`, 'delete', selectedCards)
+    })
+
+})

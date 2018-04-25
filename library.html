@@ -124,7 +124,8 @@
                             <div class="add-card-modal-body">
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary card-add-cancel" data-dismiss="modal">Cancel</button>
+                                <p class="success-display">Card(s) Added!</p>
+                                <button type="button" class="btn btn-secondary card-add-cancel" data-dismiss="modal">Done</button>
                                 <button type="button" class="btn btn-primary card-add">Add Card(s)</button>
                             </div>
                         </div>
@@ -141,17 +142,17 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel">Enter Card Name:</h5>
-                                <form>
-                                    <input type="text">
+                                <form class='remove-card-form'>
+                                    <input class='removeCardQuery' name='removeCardQuery' type="text">
                                     <input value='Search' type='submit'>
                                 </form>
                             </div>
-                            <div class="modal-body">
-                                ...
+                            <div class="remove-card-modal-body">
                             </div>
                             <div class="modal-footer">
+                                    <p class="remove-success-display">Card(s) Removed!</p>
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                <button type="button" class="btn btn-primary">Remove Card(s)</button>
+                                <button type="button" class="btn btn-primary card-remove">Remove Card(s)</button>
                             </div>
                         </div>
                     </div>
