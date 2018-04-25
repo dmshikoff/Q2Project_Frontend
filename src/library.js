@@ -91,10 +91,11 @@ addCardForm.addEventListener('submit', event => {
 
   axios.get(`https://api.magicthegathering.io/v1/cards${queryText}`)
     .then(response => {
+      
       cards = response.data.cards.map(card => {
         return returnDisplay(card)
       })
-
+      console.log(cards)
 
       cards.reduce((acc, ele) => {
           acc.push({
@@ -107,7 +108,74 @@ addCardForm.addEventListener('submit', event => {
           const putArray = []
           display.appendChild(createImgElementInModal(ele))
         })
-      // const cardArray = document.querySelectorAll('.library-img')
+      const cardArray = document.querySelectorAll('.library-img')
+    })
+})
+
+const addCard = document.querySelector('.card-add')
+addCard.addEventListener('click', event => {
+  const successText = document.querySelector('.success-display')
+  successText.classList.add('show')
+  setTimeout(() => {
+    successText.classList.remove('show')
+  }, 2000)
+  request('/auth/token')
+    .then(response => {
+
+      request(`/users/${response.data.id}/cards`, 'post', selectedCards)
+    })
+
+})
+
+const removeCardForm = document.querySelector('.remove-card-form')
+removeCardForm.addEventListener('submit', event => {
+  event.preventDefault()
+
+  const display = document.querySelector('.remove-card-modal-body')
+  empty(display)
+
+  let searchQuery = {}
+  searchQuery.name = textQueryCreator(event.target.removeCardQuery.value)
+  let queryText = `?`
+  for (let key in searchQuery) {
+    const keyValueText = `${key}=${searchQuery[key]}`
+    queryText += `${keyValueText}&`
+  }
+  queryText = queryText.slice(0, queryText.length - 1)
+
+  request('/auth/token')
+    .then(response => {
+
+      request(`/users/${response.data.id}/cards${queryText}`)
+        .then(response => {
+          cards = response.data
+
+          cards.reduce((acc, ele) => {
+              acc.push({
+                img: ele.img,
+                id: ele.id
+              })
+              return acc
+            }, [])
+            .forEach(ele => {
+              display.appendChild(createRemoveImgElementInModal(ele))
+            })
+          const cardArray = document.querySelectorAll('.library-img')
+        })
+    })
+})
+
+const removeCard = document.querySelector('.card-remove')
+removeCard.addEventListener('click', event => {
+  const successText = document.querySelector('.remove-success-display')
+  successText.classList.add('show')
+  setTimeout(() => {
+    successText.classList.remove('show')
+  }, 2000)
+  request('/auth/token')
+    .then(response => {
+
+      request(`/users/${response.data.id}/cards`, 'delete', selectedCards)
     })
 })
 
@@ -120,8 +188,19 @@ function createImgElementInModal(string) {
   img.classList.add('library-img')
   img.addEventListener('click', event => {
     img.classList.add('selected')
+    selectedCards.push(cards.find(obj => obj.multiverseId == event.target.getAttribute('data-id')))
+  })
+  return img
+}
+
+function createRemoveImgElementInModal(string) {
+  let img = document.createElement('img')
+  img.setAttribute('src', string.img)
+  img.setAttribute('data-id', string.id)
+  img.classList.add('library-img')
+  img.addEventListener('click', event => {
+    img.classList.add('selected')
     selectedCards.push(cards.find(obj => obj.id == event.target.getAttribute('data-id')))
-    console.log(selectedCards)
   })
   return img
 }
@@ -129,6 +208,12 @@ function createImgElementInModal(string) {
 const addCardCancel = document.querySelector('.card-add-cancel')
 addCardCancel.addEventListener('click', event => {
   const display = document.querySelector('.add-card-modal-body')
+  empty(display)
+})
+
+const removeCardCancel = document.querySelector('.card-remove-cancel')
+removeCardCancel.addEventListener('click', event => {
+  const display = document.querySelector('.remove-card-modal-body')
   empty(display)
 })
 
@@ -170,22 +255,6 @@ function returnDisplay(obj) {
   return resultObj
 }
 
-const addCard = document.querySelector('.card-add')
-addCard.addEventListener('click', event => {
-  const successText = document.querySelector('.success-display')
-  successText.classList.add('show')
-  setTimeout(() => {
-    successText.classList.remove('show')
-  }, 2000)
-  request('/auth/token')
-    .then(response => {
-
-      request(`/users/${response.data.id}/cards`, 'post', selectedCards)
-    })
-
-})
-
-
 function textQueryCreator(string) {
   let newString = string.trim()
     .split(' ')
@@ -207,55 +276,4 @@ function empty(element) {
   }
 }
 
-const removeCardForm = document.querySelector('.remove-card-form')
-removeCardForm.addEventListener('submit', event => {
-  event.preventDefault()
-
-  const display = document.querySelector('.remove-card-modal-body')
-  empty(display)
-
-  let searchQuery = {}
-  searchQuery.name = textQueryCreator(event.target.removeCardQuery.value)
-  let queryText = `?`
-  for (let key in searchQuery) {
-    const keyValueText = `${key}=${searchQuery[key]}`
-    queryText += `${keyValueText}&`
-  }
-  queryText = queryText.slice(0, queryText.length - 1)
-
-  request('/auth/token')
-    .then(response => {
-
-      request(`/users/${response.data.id}/cards${queryText}`)
-        .then(response => {
-          cards = response.data
-
-          cards.reduce((acc, ele) => {
-              acc.push({
-                img: ele.img,
-                id: ele.id
-              })
-              return acc
-            }, [])
-            .forEach(ele => {
-              display.appendChild(createImgElementInModal(ele))
-            })
-          // const cardArray = document.querySelectorAll('.library-img')
-        })
-    })
-})
-
-const removeCard = document.querySelector('.card-remove')
-removeCard.addEventListener('click', event => {
-  const successText = document.querySelector('.remove-success-display')
-  successText.classList.add('show')
-  setTimeout(() => {
-    successText.classList.remove('show')
-  }, 2000)
-  request('/auth/token')
-    .then(response => {
-
-      request(`/users/${response.data.id}/cards`, 'delete', selectedCards)
-    })
-
-})
+const newDeck = document.querySelector('#new-deck')

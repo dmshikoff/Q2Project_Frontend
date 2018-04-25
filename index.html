@@ -35,9 +35,17 @@
                         <input class='login' value='Login' type='submit'>
                         <div id="error" class="hide-auth-error">Incorrect Username or Password</div>
                     </form>
-                </div>
-                <div>
-                    <a href="/library.html">Next Page</a>
+                    <form class='new-user-form'>
+                        <h2>New User</h2>
+                        <label>Username:
+                                <input type="text" name='createUsername' placeholder='username'>
+                            </label>
+                            <label>Password:
+                                <input type="password" name='createPassword' placeholder='password'>
+                            </label>
+                            <input class='login' value='Create' type='submit'>
+                            <div id="createError" class="hide-auth-error">Invalid Username or Password</div>
+                    </form>
                 </div>
             </div>
         </div>

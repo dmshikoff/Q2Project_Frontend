@@ -34,6 +34,20 @@
   })
 })();
 
+//create login form
+document.querySelector('.new-user-form').addEventListener('submit', event => {
+  event.preventDefault()
 
+  const username = event.target.createUsername.value
+  const password = event.target.createPassword.value
 
-// request(`/cards?white=true&blue=true`)
+  request('/users', 'post', {
+    username,
+    password
+  })
+  .then(console.log)
+  .catch(error => {
+    document.querySelector('#error').classList.remove('hide-auth-error')
+  })
+
+})
