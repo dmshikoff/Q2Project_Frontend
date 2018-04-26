@@ -1,3 +1,17 @@
+
+//ON PAGE LOAD DISPLAY//
+
+const decksButton = document.querySelector('.decks-button')
+const libraryButton = document.querySelector('.library-button')
+
+decksButton.addEventListener('click', event => {
+    request('/auth/token')
+        .then(response => {
+            window.location = 'library.html'
+        })
+})
+
+
 const searchString = window.location.search.slice(1).split('&').map(ele => {
     const [key, value] = ele.split('=')
     return {
@@ -9,14 +23,27 @@ const searchString = window.location.search.slice(1).split('&').map(ele => {
     }
 }, {})
 
+const newDeckNameTitle = document.querySelector('.new-deck-name-title')
+request('/auth/token')
+    .then(response => {
+        return request(`/users/${response.data.id}/decks/${searchString.id}`, 'get')
+    })
+    .then(response => {
+        newDeckNameTitle.innerHTML = response.data.data[0].name
+    })
 
-// request('/auth/token')
-//     .then(response => {
-//         return request(`/users/${response.data.id}/decks/${searchString.id}`)
-//     })
-//     .then(response => {
-        
-//     })
+request('/auth/token')
+    .then(response => {
+        return request(`/users/${response.data.id}/decks/${searchString.id}/cards`, 'get')
+    })
+    .then(response => {
+        const newDeckDisplay = document.querySelector('.new-deck-display')
+        response.data.data.forEach(obj => {
+            newDeckDisplay.appendChild(createImgElement(obj))
+        })
+    })
+
+// PAGE BUTTON FUNCTIONALITY //
 
 const addCardToDeckForm = document.querySelector('.library-deck-form')
 addCardToDeckForm.addEventListener('submit', event => {
@@ -80,6 +107,30 @@ addCardToDeckForm.addEventListener('submit', event => {
         })
 })
 
+let selectedCards = []
+const addCardToDeck = document.querySelector('.card-add-to-deck')
+addCardToDeck.addEventListener('click', event => {
+
+    request('/auth/token')
+        .then(response => {
+
+            return request(`/users/${response.data.id}/decks/${searchString.id}/cards`, 'post', selectedCards)
+        })
+        .then(response => {
+            return request(`/users/${response.data.id}/someCards`, 'post', response.data.data)
+        })
+        .then(response => {
+            const newDeckDisplay = document.querySelector('.new-deck-display')
+            response.data.data.map(dataArray => {
+                dataArray.forEach(obj => {
+                    newDeckDisplay.appendChild(createImgElement(obj))
+                })
+            })
+        })
+})
+
+// HELPER FUNCTIONS SPECIFIC TO THIS PAGE //
+
 function textQueryCreator(string) {
     let newString = string.trim()
         .split(' ')
@@ -99,21 +150,11 @@ function createImgElementInModal(obj) {
     return img
 }
 
-let selectedCards = []
+function createImgElement(obj) {
+    let img = document.createElement('img')
+    img.setAttribute('src', obj.img)
+    img.setAttribute('data-id', obj.id)
+    img.classList.add('library-img')
+    return img
+}
 
-const addCardToDeck = document.querySelector('.card-add-to-deck')
-addCardToDeck.addEventListener('click', event => {
-
-    request('/auth/token')
-    .then(response => {
-        
-        return request(`/users/${response.data.id}/decks/${searchString.id}`, 'post', selectedCards)
-    })
-    .then(response => {
-        return request(`/users/${response.data.id}/cards`, 'post', response.data.data)
-    })
-    .then(response => {
-        console.log(response)
-    })
-    .catch(console.log('error'))
-})

@@ -320,26 +320,25 @@ const newDeckForm = document.querySelector('.new-deck-name-form')
 newDeckForm.addEventListener('submit', event => {
   event.preventDefault()
 
-
   request('/auth/token')
-    .then(response => {
-
-      request(`/users/${response.data.id}/decks`, 'post', {
-          name: event.target.cardNameValue.value
-        })
         .then(response => {
+          return request(`/users/${response.data.id}/decks`, 'post', {
+            name: event.target.cardNameValue.value
+          })
+        })
+          .then(response => {
+            window.location = `decks.html?id=${response.data.data.id}`
 
-          const newDeckNameTitle = document.querySelector('.new-deck-name-title')
-          newDeckNameTitle.innerHTML = event.target.cardNameValue.value
-          libraryCont.classList.add('hide')
-          decksCont.classList.add('hide')
-          newDeckCont.classList.remove('hide')
+          // const newDeckNameTitle = document.querySelector('.new-deck-name-title')
+          // newDeckNameTitle.innerHTML = event.target.cardNameValue.value
+          // libraryCont.classList.add('hide')
+          // decksCont.classList.add('hide')
+          // newDeckCont.classList.remove('hide')
 
-          renderMyDecks(event.target.cardNameValue.value)
+          // renderMyDecks(event.target.cardNameValue.value)
 
           $('#addDeckModal').modal('hide')
-        })
-    })
+          }) 
 })
 
 function renderMyDecks(id, name){
