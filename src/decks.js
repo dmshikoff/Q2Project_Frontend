@@ -5,10 +5,33 @@ const decksButton = document.querySelector('.decks-button')
 const libraryButton = document.querySelector('.library-button')
 
 decksButton.addEventListener('click', event => {
+    console.log('heyo')
     request('/auth/token')
         .then(response => {
-            window.location = 'library.html'
+            window.location = 'yourDecks.html'
         })
+})
+
+libraryButton.addEventListener('click', event => {
+    request('/auth/token')
+    .then(response => {
+        window.location = 'library.html'
+    })
+})
+
+const accountName = document.querySelector('.your-account-name')
+request(`/auth/token`)
+.then(response => {
+  return request(`/users/${response.data.id}`)
+})
+.then(response => {
+  accountName.innerHTML = `Welcome, ${response.data.data[0].username}`
+})
+
+const logout = document.querySelector('.logout-button')
+logout.addEventListener('click', event => {
+  window.location = 'index.html'
+  localStorage.removeItem('token')
 })
 
 

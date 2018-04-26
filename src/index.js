@@ -45,9 +45,20 @@ document.querySelector('.new-user-form').addEventListener('submit', event => {
     username,
     password
   })
-  .then(console.log)
+  .then( response => {
+    return request('/auth/token', 'post', {
+      username,
+      password
+    })
+  })
+  .then( response => {
+    document.querySelector('#error').classList.add('hide-auth-error')
+        localStorage.setItem('token', response.data.token)
+        window.location = 'library.html'
+  })
   .catch(error => {
-    document.querySelector('#error').classList.remove('hide-auth-error')
+    // document.querySelector('#error').classList.remove('hide-auth-error')
+    console.log(error)
   })
 
 })

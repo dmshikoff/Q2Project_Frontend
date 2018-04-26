@@ -14,35 +14,52 @@
     })
 });
 
+// background-image: url('../img/landArt6.jpg');
+
+function displayImgRotate(){
+  bgImgArray = ['../img/landArt1.jpg','../img/landArt2.jpg', '../img/landArt3.jpg', '../img/landArt4.png']
+  const imgCont = document.querySelector('.img-row')
+  let counter = 0
+  setInterval(()=>{
+    imgCont.setAttribute('style', `background-image: url(${bgImgArray[counter]}); transition: all .5s ease`)
+    counter++
+    counter%=bgImgArray.length
+  },5000)
+}
+
+displayImgRotate()
+
+
+
 const decksButton = document.querySelector('.deck-button')
 const libraryButton = document.querySelector('.library-button')
 const libraryCont = document.querySelector('.library-cont')
 const decksCont = document.querySelector('.decks-cont')
-const newDeckCont = document.querySelector('.new-deck-cont')
+
 
 decksButton.addEventListener('click', event => {
-  libraryCont.classList.add('hide')
-  decksCont.classList.remove('hide')
-  newDeckCont.classList.add('hide')
-
-  request(`/auth/token`)
-  .then(response => {
-
-   return request(`/users/${response.data.id}/decks`)    
-  })
-  .then(response => {
-
-      response.data.data.forEach(deck => {
-        renderMyDecks(deck.id, deck.name)
-      })
-  })
+  window.location = 'yourDecks.html'
 })
 
 libraryButton.addEventListener('click', event => {
-  libraryCont.classList.remove('hide')
-  decksCont.classList.add('hide')
-  newDeckCont.classList.add('hide')
+  window.location = 'library.html'
 })
+
+const accountName = document.querySelector('.your-account-name')
+request(`/auth/token`)
+.then(response => {
+  return request(`/users/${response.data.id}`)
+})
+.then(response => {
+  accountName.innerHTML = `Welcome, ${response.data.data[0].username}`
+})
+
+const logout = document.querySelector('.logout-button')
+logout.addEventListener('click', event => {
+  window.location = 'index.html'
+  localStorage.removeItem('token')
+})
+
 
 const librarySearch = document.querySelector('.library-search-form')
 librarySearch.addEventListener('submit', event => {
@@ -302,44 +319,11 @@ function createImgElement(string) {
   display.appendChild(img)
 }
 
-// function createImgElementInModal(string){
-//   const display = document.querySelector('.add-card-to-deck-modal-body')
-//   let img = document.createElement('img')
-//   img.setAttribute('src', string)
-//   img.classList.add('library-img')
-//   display.appendChild(img)
-// }
-
 function empty(element) {
   while (element.firstChild) {
     element.removeChild(element.firstChild)
   }
 }
-
-const newDeckForm = document.querySelector('.new-deck-name-form')
-newDeckForm.addEventListener('submit', event => {
-  event.preventDefault()
-
-  request('/auth/token')
-        .then(response => {
-          return request(`/users/${response.data.id}/decks`, 'post', {
-            name: event.target.cardNameValue.value
-          })
-        })
-          .then(response => {
-            window.location = `decks.html?id=${response.data.data.id}`
-
-          // const newDeckNameTitle = document.querySelector('.new-deck-name-title')
-          // newDeckNameTitle.innerHTML = event.target.cardNameValue.value
-          // libraryCont.classList.add('hide')
-          // decksCont.classList.add('hide')
-          // newDeckCont.classList.remove('hide')
-
-          // renderMyDecks(event.target.cardNameValue.value)
-
-          $('#addDeckModal').modal('hide')
-          }) 
-})
 
 function renderMyDecks(id, name){
   const decksDisplay = document.querySelector('.all-decks-display')
@@ -361,77 +345,4 @@ function renderMyDecks(id, name){
 
   decksDisplay.appendChild(deckDiv)
 }
-
-
-
-const addCardToDeckForm = document.querySelector('.library-deck-form')
-addCardToDeckForm.addEventListener('submit', event => {
-  event.preventDefault()
-  const display = document.querySelector('.add-card-to-deck-modal-body')
-  empty(display)
-  let searchQuery = {}
-  if (event.target.createDeckRadios.value === 'name' && event.target.AddDeckSearchTerm.value) {
-    searchQuery.name = textQueryCreator(event.target.AddDeckSearchTerm.value)
-  }
-  if (event.target.createDeckRadios.value === 'type' && event.target.AddDeckSearchTerm.value) {
-    searchQuery.type = textQueryCreator(event.target.AddDeckSearchTerm.value)
-  }
-  if (event.target.createDeckRadios.value === 'subtype' && event.target.AddDeckSearchTerm.value) {
-    searchQuery.subtype = textQueryCreator(event.target.AddDeckSearchTerm.value)
-  }
-  if (event.target.createDeckRadios.value === 'text' && event.target.AddDeckSearchTerm.value) {
-    searchQuery.text = textQueryCreator(event.target.AddDeckSearchTerm.value)
-  }
-  if (event.target.white.checked === true) {
-    searchQuery.white = true
-  }
-  if (event.target.blue.checked === true) {
-    searchQuery.blue = true
-  }
-  if (event.target.black.checked === true) {
-    searchQuery.black = true
-  }
-  if (event.target.red.checked === true) {
-    searchQuery.red = true
-  }
-  if (event.target.green.checked === true) {
-    searchQuery.green = true
-  }
-  if (event.target.colorless.checked === true) {
-    searchQuery.colorless = true
-  }
-  let queryText = `?`
-  for (let key in searchQuery) {
-    const keyValueText = `${key}=${searchQuery[key]}`
-    queryText += `${keyValueText}&`
-  }
-  queryText = queryText.slice(0, queryText.length - 1)
-
-  request('/auth/token')
-    .then(response => {
-      request(`/users/${response.data.id}/cards${queryText}`)
-        .then(data => {
-          let cards = data.data
-          cards.reduce((acc, ele) => {
-            acc.push({
-              img: ele.img
-            })
-            return acc
-          }, [])
-          cards.forEach(ele => {
-
-            display.appendChild(createImgElementInModal(ele))
-          })
-        })
-    })
-})
-
-// const addCardToDeck = document.querySelector('.card-add-to-deck')
-// addCardToDeck.addEventListener('click', event => {
-
-//   request(`/auth/token`)
-//     .then(response => {
-//       request(`/users/${response.data.id}/decks/`)
-//     })
-// })
 

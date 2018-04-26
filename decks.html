@@ -24,18 +24,22 @@
     <div class='container-fluid img-nav-cont'>
         <div class='row decks-img-row'>
         </div>
-        <div class='row justify-content-center'>
-            <nav class="navbar navbar-light bg-light">
-                <button class="btn btn-outline-success library-button" type="button">Library</button>
-                <button class="btn btn-outline-success decks-button" type="button">Decks</button>
-            </nav>
-        </div>
+        <div class='row d-flex'>
+                <nav class="navbar navbar-light bg-light justify-content-around">
+                    <div><p class='your-account-name'></p></div>
+                    <div class='col-10 d-flex align-items-center justify-content-around'>
+                        <button class='btn btn-outline-success logout-button' type='button'>Log Out</button>
+                        <button class="btn btn-outline-success library-button" type="button">Library</button>
+                        <button class="btn btn-outline-success decks-button" type="button">Decks</button>
+                    </div>
+                </nav>
+            </div>
     </div>
     <div class='row d-flex justify-content-center'>
             <div class='col-8 new-deck-page text-center'>
-                <h1 class='new-deck-name-title'></h1>
+                <h1 class='beleren new-deck-name-title'></h1>
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                <button type="button" class="beleren btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                     Add Card
                 </button>
 
@@ -44,7 +48,7 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Search Your Library for Cards</h5>
+                                <h5 class="beleren modal-title" id="exampleModalLabel">Search Your Library for Cards</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -52,38 +56,38 @@
                             <div class="modal-body">
                                 <form class='library-deck-form'>
                                     <input name='AddDeckSearchTerm' type="text">
-                                    <input class='add-deck-search' value='Search' type='submit'>
+                                    <input class='beleren add-deck-search' value='Search' type='submit'>
                                     <br>
                                     <br>
-                                    <label>Filter by:</label>
+                                    <label class='beleren'>Filter by:</label>
                                     <br>
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input name" type="radio" name="createDeckRadios" id="createDeckName" value="name" checked>
-                                        <label class="form-check-label" for="name">
+                                        <label class="beleren form-check-label" for="name">
                                             Name
                                         </label>
                                     </div>
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input type" type="radio" name="createDeckRadios" id="createDeckType" value="type">
-                                        <label class="form-check-label" for="type">
+                                        <label class="beleren form-check-label" for="type">
                                             Type
                                         </label>
                                     </div>
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input subtype" type="radio" name="createDeckRadios" id="createDeckSubtype" value="subtype">
-                                        <label class="form-check-label" for="subtype">
+                                        <label class="beleren form-check-label" for="subtype">
                                             Subtype
                                         </label>
                                     </div>
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input text" type="radio" name="createDeckRadios" id="createDeckText" value="text">
-                                        <label class="form-check-label" for="text">
+                                        <label class="beleren form-check-label" for="text">
                                             Text
                                         </label>
                                     </div>
                                     <br>
                                     <br>
-                                    <label>Mana Type:</label>
+                                    <label class='beleren'>Mana Type:</label>
                                     <br>
                                     <div class="form-check form-check-inline">
                                         <input name='white' class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
@@ -126,8 +130,8 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Done</button>
-                                <button type="button" class="btn btn-primary card-add-to-deck">Add Card(s) to Deck</button>
+                                <button type="button" class="beleren btn btn-secondary" data-dismiss="modal">Done</button>
+                                <button type="button" class="beleren btn btn-primary card-add-to-deck">Add Card(s) to Deck</button>
                             </div>
                         </div>
                     </div>

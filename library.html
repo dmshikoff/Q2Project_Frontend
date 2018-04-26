@@ -23,10 +23,14 @@
     <div class='container-fluid img-nav-cont'>
         <div class='row img-row'>
         </div>
-        <div class='row justify-content-center'>
-            <nav class="navbar navbar-light bg-light">
-                <button class="btn btn-outline-success library-button" type="button">Library</button>
-                <button class="btn btn-outline-success deck-button" type="button">Decks</button>
+        <div class='row d-flex'>
+            <nav class="navbar navbar-light bg-light justify-content-around">
+                <div><p class='your-account-name'></p></div>
+                <div class='col-10 d-flex align-items-center justify-content-around'>
+                    <button class='beleren btn btn-outline-success logout-button' type='button'>Log Out</button>
+                    <button class="beleren btn btn-outline-success library-button" type="button">Library</button>
+                    <button class="beleren btn btn-outline-success deck-button" type="button">Decks</button>
+                </div>
             </nav>
         </div>
     </div>
@@ -35,38 +39,38 @@
             <div class='col-6 text-center'>
                 <form class='library-search-form'>
                     <input name='searchTerm' type="text">
-                    <input class='login' value='Search' type='submit'>
+                    <input class='beleren login' value='Search' type='submit'>
                     <br>
                     <br>
-                    <label>Filter by:</label>
+                    <label class='beleren'>Filter by:</label>
                     <br>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input name" type="radio" name="exampleRadios" id="name" value="name" checked>
-                        <label class="form-check-label" for="name">
+                        <label class="beleren form-check-label" for="name">
                             Name
                         </label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input type" type="radio" name="exampleRadios" id="type" value="type">
-                        <label class="form-check-label" for="type">
+                        <label class="beleren form-check-label" for="type">
                             Type
                         </label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input subtype" type="radio" name="exampleRadios" id="subtype" value="subtype">
-                        <label class="form-check-label" for="subtype">
+                        <label class="beleren form-check-label" for="subtype">
                             Subtype
                         </label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input text" type="radio" name="exampleRadios" id="text" value="text">
-                        <label class="form-check-label" for="text">
+                        <label class="beleren form-check-label" for="text">
                             Text
                         </label>
                     </div>
                     <br>
                     <br>
-                    <label>Mana Type:</label>
+                    <label class='beleren'>Mana Type:</label>
                     <br>
                     <div class="form-check form-check-inline">
                         <input name='white' class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
@@ -108,7 +112,7 @@
             </div>
             <div class='col-6 text-center'>
                 <!-- Button trigger add card modal -->
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">
+                <button type="button" class="beleren btn btn-primary" data-toggle="modal" data-target="#addModal">
                     Add Card
                 </button>
 
@@ -126,7 +130,7 @@
                             <div class="add-card-modal-body">
                             </div>
                             <div class="modal-footer">
-                                <p class="success-display">Card(s) Added!</p>
+                                <p class="beleren success-display">Card(s) Added!</p>
                                 <button type="button" class="btn btn-secondary card-add-cancel" data-dismiss="modal">Done</button>
                                 <button type="button" class="btn btn-primary card-add">Add Card(s)</button>
                             </div>
@@ -134,7 +138,7 @@
                     </div>
                 </div>
                 <!-- Button trigger remove card modal -->
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#removeModal">
+                <button type="button" class="beleren btn btn-primary" data-toggle="modal" data-target="#removeModal">
                     Remove Card
                 </button>
 
@@ -143,7 +147,7 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Enter Card Name:</h5>
+                                <h5 class="beleren modal-title" id="exampleModalLabel">Enter Card Name:</h5>
                                 <form class='remove-card-form'>
                                     <input class='removeCardQuery' name='removeCardQuery' type="text">
                                     <input value='Search' type='submit'>
@@ -152,9 +156,9 @@
                             <div class="remove-card-modal-body">
                             </div>
                             <div class="modal-footer">
-                                <p class="remove-success-display">Card(s) Removed!</p>
-                                <button type="button" class="btn btn-secondary card-remove-cancel" data-dismiss="modal">Done</button>
-                                <button type="button" class="btn btn-primary card-remove">Remove Card(s)</button>
+                                <p class="beleren remove-success-display">Card(s) Removed!</p>
+                                <button type="button" class="beleren btn btn-secondary card-remove-cancel" data-dismiss="modal">Done</button>
+                                <button type="button" class="beleren btn btn-primary card-remove">Remove Card(s)</button>
                             </div>
                         </div>
                     </div>
@@ -162,7 +166,7 @@
             </div>
         </div>
         <div class='row'>
-            <div class='col text-center'>
+            <div class='beleren col text-center'>
                 <h1>Your Library</h1>
                 <p class='library-display'></p>
             </div>
@@ -172,10 +176,10 @@
 
     <div class='container-fluid decks-cont hide'>
         <div class='row'>
-            <div class='col-2 deck-info-col'>
+            <div class='beleren col-2 deck-info-col'>
                 <h2>Deck Info:</h2>
             </div>
-            <div class='col-8 text-center'>
+            <div class='beleren col-8 text-center'>
                 <h1>Your Decks</h1>
                 <div class='d-flex flex-wrap justify-content-center'>
                     <p class='all-decks-display'></p>
@@ -183,7 +187,7 @@
             </div>
             <div class='col-2'>
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addDeckModal">
+                <button type="button" class="beleren btn btn-primary" data-toggle="modal" data-target="#addDeckModal">
                     New Deck
                 </button>
 
@@ -192,7 +196,7 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">New Deck Name</h5>
+                                <h5 class="beleren modal-title" id="exampleModalLabel">New Deck Name</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -213,13 +217,13 @@
 
     <div class='container-fluid new-deck-cont hide'>
         <div class='row'>
-            <div class='col-2 new-deck-info-col'>
+            <div class='beleren col-2 new-deck-info-col'>
                 <h2>Deck Info:</h2>
             </div>
             <div class='col-8 new-deck-page text-center'>
                 <h1 class='new-deck-name-title'></h1>
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                <button type="button" class="beleren btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                     Add Card
                 </button>
 
@@ -228,7 +232,7 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Search Your Library for Cards</h5>
+                                <h5 class="beleren modal-title" id="exampleModalLabel">Search Your Library for Cards</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -239,35 +243,35 @@
                                     <input class='add-deck-search' value='Search' type='submit'>
                                     <br>
                                     <br>
-                                    <label>Filter by:</label>
+                                    <label class='beleren' >Filter by:</label>
                                     <br>
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input name" type="radio" name="createDeckRadios" id="createDeckName" value="name" checked>
-                                        <label class="form-check-label" for="name">
+                                        <label class="beleren form-check-label" for="name">
                                             Name
                                         </label>
                                     </div>
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input type" type="radio" name="createDeckRadios" id="createDeckType" value="type">
-                                        <label class="form-check-label" for="type">
+                                        <label class="beleren form-check-label" for="type">
                                             Type
                                         </label>
                                     </div>
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input subtype" type="radio" name="createDeckRadios" id="createDeckSubtype" value="subtype">
-                                        <label class="form-check-label" for="subtype">
+                                        <label class="beleren form-check-label" for="subtype">
                                             Subtype
                                         </label>
                                     </div>
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input text" type="radio" name="createDeckRadios" id="createDeckText" value="text">
-                                        <label class="form-check-label" for="text">
+                                        <label class="beleren form-check-label" for="text">
                                             Text
                                         </label>
                                     </div>
                                     <br>
                                     <br>
-                                    <label>Mana Type:</label>
+                                    <label class='beleren'>Mana Type:</label>
                                     <br>
                                     <div class="form-check form-check-inline">
                                         <input name='white' class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
@@ -310,8 +314,8 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Done</button>
-                                <button type="button" class="btn btn-primary card-add-to-deck">Add Card(s) to Deck</button>
+                                <button type="button" class="beleren btn btn-secondary" data-dismiss="modal">Done</button>
+                                <button type="button" class="beleren btn btn-primary card-add-to-deck">Add Card(s) to Deck</button>
                             </div>
                         </div>
                     </div>
@@ -321,5 +325,4 @@
         </div>
     </div>
 </body>
-
 </html>
