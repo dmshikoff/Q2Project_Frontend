@@ -17,3 +17,8 @@ function request(path, method = 'get', body = null) {
   })
 }
 
+function empty(element) {
+  while (element.firstChild) {
+    element.removeChild(element.firstChild)
+  }
+}

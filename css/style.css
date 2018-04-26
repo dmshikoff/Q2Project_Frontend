@@ -21,6 +21,12 @@
     background-size: cover;
 }
 
+.decks-img-row {
+    height: 50vh;
+    background-image: url('../img/landArt10.jpg');
+    background-size: cover;
+}
+
 .hide-auth-error {
     visibility: hidden;
   }

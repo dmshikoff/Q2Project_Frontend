@@ -348,7 +348,6 @@ function renderMyDecks(id, name){
   const deckDiv = document.createElement('div')
   const deckName = document.createElement('h2')
 
-  // deckDiv.classList.add('d-inline-flex')
   deckName.innerHTML = name
   deckDiv.classList.add('library-img')
   deckDiv.setAttribute('data-name', name)
@@ -357,6 +356,10 @@ function renderMyDecks(id, name){
   img.setAttribute('src', '../img/Magic_Card_Back.png')
   deckDiv.appendChild(deckName)
   deckDiv.appendChild(img)
+  deckDiv.addEventListener('click', event => {
+    window.location = `decks.html?id=${id}`
+  })
+
   decksDisplay.appendChild(deckDiv)
 }
 
