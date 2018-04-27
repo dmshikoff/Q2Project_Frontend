@@ -4,15 +4,31 @@
 
   // auth gate
   request('/auth/token')
-    .then(function (response) {
-      // user is logged in
-      document.querySelector('.user-id').innerHTML = response.data.id
-    })
     .catch(function (error) {
       // user is not logged in
       window.location = '/index.html'
     })
-});
+    .then(function (response) {
+      // user is logged in
+      // document.querySelector('.user-id').innerHTML = response.data.id
+      init(response.data.id)
+    })
+})();
+
+function init(userId){
+  displayImgRotate()
+  // addToLibraryEventListener(document.querySelector('#add-library'))
+  addLocationClickEvent(document.querySelector('.deck-button'), 'yourDecks.html')
+  addLocationClickEvent(document.querySelector('.library-button'), 'library.html')
+
+  getAccountName(userId)
+  .then(response => {
+    document.querySelector('.your-account-name').innerHTML = `Welcome, ${response.data.data[0].username}`
+  })
+
+}
+
+
 
 function displayImgRotate(){
   let bgImgArray = ['../img/landArt1.jpg','../img/landArt2.jpg', '../img/landArt3.jpg', '../img/landArt4.png', '../img/landArt5.png', '../img/landArt6.jpg', '../img/landArt7.png', '../img/landArt8.jpg', '../img/landArt9.png', '../img/landArt10.jpg']
@@ -25,32 +41,33 @@ function displayImgRotate(){
   },5000)
 }
 
-displayImgRotate()
+function addLocationClickEvent(element, path){
+  element.addEventListener('click', event => {
+    window.location = path
+  })
+}
 
 
 
-const decksButton = document.querySelector('.deck-button')
-const libraryButton = document.querySelector('.library-button')
-const libraryCont = document.querySelector('.library-cont')
-const decksCont = document.querySelector('.decks-cont')
+// const decksButton = document.querySelector('.deck-button')
+// const libraryButton = document.querySelector('.library-button')
+// const libraryCont = document.querySelector('.library-cont')
+// const decksCont = document.querySelector('.decks-cont')
 
 
-decksButton.addEventListener('click', event => {
-  window.location = 'yourDecks.html'
-})
+// decksButton.addEventListener('click', event => {
+//   window.location = 'yourDecks.html'
+// })
 
-libraryButton.addEventListener('click', event => {
-  window.location = 'library.html'
-})
+// libraryButton.addEventListener('click', event => {
+//   window.location = 'library.html'
+// })
 
-const accountName = document.querySelector('.your-account-name')
-request(`/auth/token`)
-.then(response => {
-  return request(`/users/${response.data.id}`)
-})
-.then(response => {
-  accountName.innerHTML = `Welcome, ${response.data.data[0].username}`
-})
+function getAccountName(userId){
+  return request(`/users/${userId}`)
+}
+
+
 
 const logout = document.querySelector('.logout-button')
 logout.addEventListener('click', event => {
