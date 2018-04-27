@@ -1,19 +1,21 @@
 @font-face {
     font-family:"Beleren";
-    src: url("/beleren_font/Beleren-Bold.ttf")
+    src: url("./beleren_font/Beleren-Bold.ttf")
 }
 
 .form-container {
-    border: 1px solid black;
-    background: white;
+    border: 3px ridge darkgray;
     padding: 10px 20px;
-    border-radius: 30px;
+    /* border-radius: 30px; */
+    background-color: #4F4F4F;
+    color: black;
 }
 
 .index-container {
     height: 100vh;
     background-image: url('../img/landArt1.jpg');
     background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .row {
@@ -76,15 +78,51 @@
 
 .navbar {
     font-family:'Beleren', sans-serif;
-    background-color: lightgrey;
+    background-color: #4F4F4F;
     width: 100%;
+    color: black;
+    border-top: 3px ridge #F1B94B;
+    border-bottom: 3px ridge #F1B94B;
+}
+
+.mtg-logo {
+    height: 50px;
+    width: 50px;
 }
 
 .your-account-name {
     margin-bottom: 0px;
-    margin-right: 25px;
+    /* margin-right: 25px; */
+    font-size: 20px;
 }
 
 .beleren {
     font-family:'Beleren', sans-serif;
+}
+
+.login-form {
+    margin-top: 20px;
+}
+
+.form-container {
+    background-color: #4F4F4F;
+    color: black;
+}
+
+.library-cont {
+    background-image: url('../img/topography.png');
+    padding-top: 25px;
+}
+
+.nav-button {
+    border: none;
+    font-size: 25px;
+    color: #F1B94B;
+    transition: .4s ease;
+    /* background-color: black; */
+}
+
+.nav-button:hover {
+    background-color: #F1B94B;
+    color: black;
 }

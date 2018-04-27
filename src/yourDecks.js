@@ -49,6 +49,19 @@ logout.addEventListener('click', event => {
   localStorage.removeItem('token')
 })
 
+function displayImgRotate(){
+    bgImgArray = ['../img/landArt1.jpg','../img/landArt2.jpg', '../img/landArt3.jpg', '../img/landArt4.png']
+    const imgCont = document.querySelector('.img-row')
+    let counter = 0
+    setInterval(()=>{
+      imgCont.setAttribute('style', `background-image: url(${bgImgArray[counter]}); transition: all .5s ease`)
+      counter++
+      counter%=bgImgArray.length
+    },5000)
+  }
+  
+  displayImgRotate()
+
 
 
     const newDeckForm = document.querySelector('.new-deck-name-form')

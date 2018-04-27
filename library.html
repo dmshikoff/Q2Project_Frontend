@@ -24,12 +24,18 @@
         <div class='row img-row'>
         </div>
         <div class='row d-flex'>
-            <nav class="navbar navbar-light bg-light justify-content-around">
-                <div><p class='your-account-name'></p></div>
+            <nav class="navbar navbar-light bg justify-content-around">
                 <div class='col-10 d-flex align-items-center justify-content-around'>
-                    <button class='beleren btn btn-outline-success logout-button' type='button'>Log Out</button>
-                    <button class="beleren btn btn-outline-success library-button" type="button">Library</button>
-                    <button class="beleren btn btn-outline-success deck-button" type="button">Decks</button>
+                    <button class="nav-button beleren btn btn-outline-success library-button" type="button">Library</button>
+                    <div class='justify-content-center'>
+                            <div class='row justify-content-center'>
+                                    <button class="nav-button beleren btn btn-outline-success logout-button" type='button'><img class='mtg-logo' src="./img/mtg_logo.png" alt="MTG Logo"></button>
+                            </div>
+                            <div class='row justify-content-center'>
+                                    <p class='your-account-name'></p>
+                            </div>
+                        </div>
+                    <button class="nav-button beleren btn btn-outline-success deck-button" type="button">Decks</button>
                 </div>
             </nav>
         </div>
@@ -174,155 +180,6 @@
         <hr>
     </div>
 
-    <div class='container-fluid decks-cont hide'>
-        <div class='row'>
-            <div class='beleren col-2 deck-info-col'>
-                <h2>Deck Info:</h2>
-            </div>
-            <div class='beleren col-8 text-center'>
-                <h1>Your Decks</h1>
-                <div class='d-flex flex-wrap justify-content-center'>
-                    <p class='all-decks-display'></p>
-                </div>
-            </div>
-            <div class='col-2'>
-                <!-- Button trigger modal -->
-                <button type="button" class="beleren btn btn-primary" data-toggle="modal" data-target="#addDeckModal">
-                    New Deck
-                </button>
 
-                <!-- Modal -->
-                <div class="modal fade" id="addDeckModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="beleren modal-title" id="exampleModalLabel">New Deck Name</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body d-flex justify-content-center">
-                                <form class='new-deck-name-form'>
-                                    <input name='cardNameValue' type="text">
-                                    <input value='Create' type='submit'>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <hr>
-    </div>
-
-    <div class='container-fluid new-deck-cont hide'>
-        <div class='row'>
-            <div class='beleren col-2 new-deck-info-col'>
-                <h2>Deck Info:</h2>
-            </div>
-            <div class='col-8 new-deck-page text-center'>
-                <h1 class='new-deck-name-title'></h1>
-                <!-- Button trigger modal -->
-                <button type="button" class="beleren btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                    Add Card
-                </button>
-
-                <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="beleren modal-title" id="exampleModalLabel">Search Your Library for Cards</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <form class='library-deck-form'>
-                                    <input name='AddDeckSearchTerm' type="text">
-                                    <input class='add-deck-search' value='Search' type='submit'>
-                                    <br>
-                                    <br>
-                                    <label class='beleren' >Filter by:</label>
-                                    <br>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input name" type="radio" name="createDeckRadios" id="createDeckName" value="name" checked>
-                                        <label class="beleren form-check-label" for="name">
-                                            Name
-                                        </label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input type" type="radio" name="createDeckRadios" id="createDeckType" value="type">
-                                        <label class="beleren form-check-label" for="type">
-                                            Type
-                                        </label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input subtype" type="radio" name="createDeckRadios" id="createDeckSubtype" value="subtype">
-                                        <label class="beleren form-check-label" for="subtype">
-                                            Subtype
-                                        </label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input text" type="radio" name="createDeckRadios" id="createDeckText" value="text">
-                                        <label class="beleren form-check-label" for="text">
-                                            Text
-                                        </label>
-                                    </div>
-                                    <br>
-                                    <br>
-                                    <label class='beleren'>Mana Type:</label>
-                                    <br>
-                                    <div class="form-check form-check-inline">
-                                        <input name='white' class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                                        <label class="form-check-label" for="inlineCheckbox1">
-                                            <img src="../img/plains.png" alt="plains">
-                                        </label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input name='blue' class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                                        <label class="form-check-label" for="inlineCheckbox2">
-                                            <img src="../img/island.png" alt="island">
-                                        </label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input name='black' class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option3">
-                                        <label class="form-check-label" for="inlineCheckbox2">
-                                            <img src="../img/swamp.png" alt="swamp">
-                                        </label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input name='red' class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option4">
-                                        <label class="form-check-label" for="inlineCheckbox2">
-                                            <img src="../img/mountain.png" alt="mountain">
-                                        </label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input name='green' class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option5">
-                                        <label class="form-check-label" for="inlineCheckbox2">
-                                            <img src="../img/forest.png" alt="forest">
-                                        </label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input name='colorless' class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option6">
-                                        <label class="form-check-label" for="inlineCheckbox2">
-                                            <img src="../img/colorless.png" alt="colorless">
-                                        </label>
-                                    </div>
-                                </form>
-                                <div class="add-card-to-deck-modal-body">
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="beleren btn btn-secondary" data-dismiss="modal">Done</button>
-                                <button type="button" class="beleren btn btn-primary card-add-to-deck">Add Card(s) to Deck</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <p class='new-deck-display'></p>
-        </div>
-    </div>
 </body>
 </html>

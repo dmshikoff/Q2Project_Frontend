@@ -5,7 +5,6 @@ const decksButton = document.querySelector('.decks-button')
 const libraryButton = document.querySelector('.library-button')
 
 decksButton.addEventListener('click', event => {
-    console.log('heyo')
     request('/auth/token')
         .then(response => {
             window.location = 'yourDecks.html'
@@ -18,6 +17,19 @@ libraryButton.addEventListener('click', event => {
         window.location = 'library.html'
     })
 })
+
+function displayImgRotate(){
+    bgImgArray = ['../img/landArt1.jpg','../img/landArt2.jpg', '../img/landArt3.jpg', '../img/landArt4.png']
+    const imgCont = document.querySelector('.img-row')
+    let counter = 0
+    setInterval(()=>{
+      imgCont.setAttribute('style', `background-image: url(${bgImgArray[counter]}); transition: all .5s ease`)
+      counter++
+      counter%=bgImgArray.length
+    },5000)
+  }
+  
+  displayImgRotate()
 
 const accountName = document.querySelector('.your-account-name')
 request(`/auth/token`)
