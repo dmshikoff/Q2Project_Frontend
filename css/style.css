@@ -126,3 +126,13 @@
     background-color: #F1B94B;
     color: black;
 }
+
+.add-card-to-lib-button, .remove-card-to-lib-button {
+    background-color: black;
+    border: black;
+}
+
+.add-card-to-lib-button:hover, .remove-card-to-lib-button:hover {
+    background-color: #4F4F4F;
+    color: #F1B94B;
+}
