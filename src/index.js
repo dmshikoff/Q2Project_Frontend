@@ -54,7 +54,7 @@ document.querySelector('.new-user-form').addEventListener('submit', event => {
 })
 
 function displayImgRotate(){
-  bgImgArray = ['../img/landArt1.jpg','../img/landArt2.jpg', '../img/landArt3.jpg', '../img/landArt4.png', '../img/landArt5.png', '../img/landArt6.jpg', '../img/landArt7.png', '../img/landArt8.jpg', '../img/landArt9.png', '../img/landArt10.jpg']
+  let bgImgArray = ['../img/landArt1.jpg','../img/landArt2.jpg', '../img/landArt3.jpg', '../img/landArt4.png', '../img/landArt5.png', '../img/landArt6.jpg', '../img/landArt7.png', '../img/landArt8.jpg', '../img/landArt9.png', '../img/landArt10.jpg']
   const imgCont = document.querySelector('.index-container')
   let counter = 0
   setInterval(()=>{

@@ -19,7 +19,7 @@ libraryButton.addEventListener('click', event => {
 })
 
 function displayImgRotate(){
-    bgImgArray = ['../img/landArt1.jpg','../img/landArt2.jpg', '../img/landArt3.jpg', '../img/landArt4.png']
+    let bgImgArray = ['../img/landArt1.jpg','../img/landArt2.jpg', '../img/landArt3.jpg', '../img/landArt4.png', '../img/landArt5.png', '../img/landArt6.jpg', '../img/landArt7.png', '../img/landArt8.jpg', '../img/landArt9.png', '../img/landArt10.jpg']
     const imgCont = document.querySelector('.img-row')
     let counter = 0
     setInterval(()=>{
