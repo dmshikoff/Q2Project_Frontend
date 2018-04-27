@@ -140,3 +140,7 @@
     background-color: #4F4F4F;
     color: #F1B94B;
 }
+
+html {
+    background-image: url('../img/topography.png');
+}
