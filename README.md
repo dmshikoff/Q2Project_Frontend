@@ -1,4 +1,6 @@
-# MTG Assistant
+# MTG Assistant - Front End
+
+[Link to MTG Assistant - Back End](https://github.com/dmshikoff/Q2Project_Backend)
 
 MTG Assistant is a web app for Magic, The Gathering players. 
 The app allows the user to catologue their entire 
@@ -13,7 +15,7 @@ This project requires Node.js to work but does not utilize common frameworks suc
 3. Once in the destination folder, type command ```git init```
 4. Go back to Github to your forked copy. Click the green "Copy or Download" button.
 5. Copy the URL
-6. Back in the Termial once you are in the destination folder, type ```git remote add origin [GITHUB URL]```
+6. Back in the Terminal once you are in the destination folder, type ```git remote add origin [GITHUB URL]```
 7. Check to make sure you did this correctly by then typing ```git remote -v```
 8. If done correctly you should see a response with origin and the url to your forked repo.
 9. Now type the command ```git pull origin master``` this will pull the whole repo to your local machine.
